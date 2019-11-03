@@ -22,6 +22,7 @@ connection = pymysql.connect(host="localhost",
                              cursorclass=pymysql.cursors.DictCursor,
                              autocommit=True)
 
+# required login
 def login_required(f):
     @wraps(f)
     def dec(*args, **kwargs):
