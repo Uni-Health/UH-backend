@@ -1,16 +1,18 @@
-from flask import Flask, request, session, send_file, jsonify, send_from_directory
-from flask_cors import CORS
 import os
 import sys
 import hashlib
 import pymysql.cursors
 from functools import wraps
+from flask import Flask, request, session, send_file, jsonify, send_from_directory
+from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
 
 STATIC_DIR = os.path.join(os.getcwd(), 'dist')
 app = Flask(__name__, static_url_path='/dist')
-app.secret_key = "super secret key"
+app.config.from_pyfile(os.path.abspath('app.cfg'))
 IMAGES_DIR = os.path.join(os.getcwd(), "images")
 CORS(app, supports_credentials=True)
+db = SQLAlchemy(app)
 
 db_password = '' if len(sys.argv) == 1 else 'root'
 connection = pymysql.connect(host="localhost",
