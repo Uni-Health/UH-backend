@@ -1,10 +1,9 @@
+import sys, os
+sys.path.insert(0, os.path.abspath('..'))
 import json
 from flask import Flask, request, render_template, jsonify
 from sqlalchemy.ext import mutable
-
-app = Flask(__name__, static_url_path='/dist')
-app.config.from_pyfile(os.path.abspath('app.cfg'))
-db = SQLAlchemy(app)
+from app import db
 
 # class for parse json file into db
 class JsonEncodedDict(db.TypeDecorator):
