@@ -3,7 +3,6 @@ import json
 from database.database import db
 from models.base import *
 
-
 class Person(db.Model):
     __tablename__ = 'person'
     usrname = db.Column('usrname', db.String, nullable=False)
