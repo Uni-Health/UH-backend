@@ -19,6 +19,8 @@ db = SQLAlchemy(app)
 api = Api(app)
 
 # required login
+
+
 def login_required(f):
     @wraps(f)
     def dec(*args, **kwargs):
@@ -45,13 +47,19 @@ def loginAuth():
 def usernameCheck():
     return usernameCheckRouter.handler(request, db, jsonify)
 
+
 # router for registration authentication
-api.add_resource(RegisterFactory, "/registerAuth", resource_class_kwargs={'route': RegisterAuthRouter(request, hashlib, db)})
+args = {"request": request, "hashlib": hashlib, "db": db}
+rf = RegisterFactory()
+api.add_resource(rf.register("patient"),
+                 "/registerAuth", resource_class_kwargs=args)
+
 
 # router for logging out of the system
 @app.route("/logout", methods=["GET"])
 def logout():
     return logoutRouter.handler(session, jsonify)
+
 
 if __name__ == "__main__":
     if not os.path.isdir("images"):

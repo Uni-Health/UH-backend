@@ -1,17 +1,19 @@
-from flask_restful import Resource
 
-class RegisterFactory(Resource):
-    def __init__(self, registerRouter):
-        self.route = registerRouter
-    
-    def get(self):
-        return self.route.get()
-    
-    def post(self):
-        return self.route.post()
-    
-    def put(self):
-        return self.route.put()
+from flask import request
+from .usernameCheckRouter import *
+from .registerAuthRouter import *
+from .logoutRouter import *
+from .loginAuthRouter import *
+from .authorizeRouter import *
+import hashlib
 
-    def delete(self):
-        return self.route.delete()
+
+class RegisterFactory:
+    def register(self, role):
+        register = get_register(role)
+        return register
+
+
+def get_register(role):
+    if role == 'patient':
+        return RegisterAuthRouter
