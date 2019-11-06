@@ -1,9 +1,8 @@
 import logging
 from flask import request
 from resources import *
-from resources.registerHandlerFactory import *
+from handlers.registerHandlerFactory import *
 from flask_restful import Resource
-
 
 class RegisterAuth(Resource):
     def get(self):
