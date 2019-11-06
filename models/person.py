@@ -1,11 +1,13 @@
-import os, json
-from flask_sqlalchemy import SQLAlchemy
-from base import *
+import os
+import json
+from database.database import db
+from models.base import *
 
-# make person model
+
 class Person(db.Model):
     __tablename__ = 'person'
-    id = db.Column('id', db.Integer, primary_key=True, unique=True, nullable=False)
+    id = db.Column('id', db.Integer, primary_key=True,
+                   unique=True, nullable=False)
     name = db.Column('name', db.String, nullable=False)
     email = db.Column('email', db.String, nullable=False)
     illness = db.Column('illness', JsonEncodedDict)
@@ -17,7 +19,7 @@ class Person(db.Model):
 
     def __repr__(self):
         return '<Person {}>'.format(self.name)
-    
+
     @property
     def profile(self):
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

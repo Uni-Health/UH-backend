@@ -1,12 +1,10 @@
 from flask_restful import Resource
+import hashlib
+from flask import request
+from database.database import db
 
 
-class RegisterAuthRouter(Resource):
-    def __init__(self, request, hashlib, db):
-        self.request = request
-        self.hashlib = hashlib
-        self.db = db
-
+class RegisterPatientAuth(Resource):
     def get(self):
         return '', 202
 
