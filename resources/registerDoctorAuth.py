@@ -4,7 +4,7 @@ from flask_restful import Resource
 from flask import request
 from database.database import db
 from error.errors import *
-from models.patient import *
+from models.doctor import *
 
 class RegisterPatientAuth(Resource):
     def get(self):
@@ -27,15 +27,15 @@ class RegisterPatientAuth(Resource):
         if username is None or hashedPassword is None or phone is None:
             return INVALID_INPUT
 
-        patient = Patient.query.filter_by(phone=phone).first()
+        doctor = Doctor.query.filter_by(phone=phone).first()
 
         if patient is not None:
             return ALREADY_EXIST
 
-        patient = Patient(username, str(phone), str(hashedPassword))
+        doctor = Doctor(username, str(phone), str(hashedPassword))
         db.session.add(patient)
         db.session.commit()
-        print(patient)
+        print(doctor)
 
         return {
             'status': 200,

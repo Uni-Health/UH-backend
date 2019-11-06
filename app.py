@@ -13,8 +13,9 @@ def create_app():
 
     # Database initialize with app
     db.init_app(app)
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.drop_all()
+        db.create_all()
 
     return app
 

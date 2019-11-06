@@ -6,16 +6,17 @@ from models.base import *
 
 class Person(db.Model):
     __tablename__ = 'person'
-    id = db.Column('id', db.Integer, primary_key=True,
-                   unique=True, nullable=False)
-    name = db.Column('name', db.String, nullable=False)
-    email = db.Column('email', db.String, nullable=False)
-    illness = db.Column('illness', JsonEncodedDict)
+    usrname = db.Column('usrname', db.String, nullable=False)
+    phone = db.Column('phone', db.String, primary_key=True, unique=True, nullable=False)
+    password = db.Column('password', db.String, nullable=False)
+    role = db.Column('role', db.String, nullable=False)
+    __mapper_args__ = {'polymorphic_on': role}
 
-    def __init__(self, name, email, illness):
-        self.name = name
-        self.email = email
-        self.illness = illness
+    def __init__(self, usrname, phone, password, role):
+        self.usrname = usrname
+        self.phone = phone
+        self.password = password
+        self.role = role
 
     def __repr__(self):
         return '<Person {}>'.format(self.name)
