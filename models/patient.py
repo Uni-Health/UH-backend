@@ -7,13 +7,13 @@ class Patient(Person):
     __tablename__ = 'patient'
     __mapper_args__ = {'polymorphic_identity': 'patient'}
 
-    def __init__(self, usrname, phone, password):
-        self.usrname = usrname
+    def __init__(self, username, phone, password):
+        self.username = username
         self.phone = phone
         self.password = password
 
     def __repr__(self):
-        return '<Patient {}>'.format(self.usrname)
+        return '<Patient {}>'.format(self.username)
 
     @property
     def profile(self):

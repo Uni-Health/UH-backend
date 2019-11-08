@@ -2,13 +2,13 @@ from error.errors import *
 from resources import *
 from handlers import *
 
-def registerHandlerFactory(role):
+def loginHandlerFactory(role):
     if role == 'patient':
-        return registerPatientHandler
+        return loginPatientHandler
     elif role == 'doctor':
-        return registerDoctorHandler
+        return loginDoctorHandler
     else:
-        return registerError
+        return loginError
 
-def registerError():
+def loginError():
     return INVALID_INPUT
